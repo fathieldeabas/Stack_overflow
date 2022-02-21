@@ -1,0 +1,197 @@
+{% load static %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+    <title>search</title>
+
+    <title>search</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+  </head>
+  <body>
+    <div class="container-fluid mt-3">
+      <form
+        class="row gx-3 gy-2 align-items-center"
+        method="GET"
+        action="http://127.0.0.1:8000/stackoversearch/?"
+      >
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.page|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.todate|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.order|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.min|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.max|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.sort|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">{{Search_form.q|as_crispy_field }}</div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.accepted|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.answers|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.body|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.nottagged|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.closed|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.tagged|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.title|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.migrated|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.user|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.url|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.notice|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.views|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.wiki|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.pagesize|as_crispy_field }}
+        </div>
+        <div class="col-sm-4 lg-4 md-4">
+          {{Search_form.fromdate|as_crispy_field }}
+        </div>
+
+          <button type="submit" class="btn btn-primary btn-block m-2">Search</button>
+      </form>
+      {% if search_data %}
+      <div class="container">
+        <div class="row">
+          {% for item in search_data %}
+          
+          <div class="card col-sm-12 col-lg-4 col-md-6 mb-4 ">
+            <img
+              class="card-img-top"
+              src="{{item.owner.profile_image}}"
+              alt="Card image cap"
+            />
+            <div class="card-body">
+              <h5 class="card-title">account_id: {{item.owner.account_id}}</h5>
+              <p class="card-text">reputation: {{item.owner.reputation}}</p>
+              <p class="card-text">user_id: {{item.owner.user_id}}</p>
+              <p class="card-text">user_type: {{item.owner.user_type}}</p>
+              <p class="card-text">accept_rate: {{item.owner.accept_rate}}</p>
+              <p class="card-text">display_name:{{item.owner.display_name}}</p>
+              <a href="{{item.owner.link}}" class="card-link"> link</a>
+            </div>
+            <ul class="list-group list-group-flush d-flex">
+              <h4>Tags</h4>
+              {% for i in item.tags%}
+              <li class="list-group-item active btn-primary">{{i}}</li>
+              {% endfor %}
+            </ul>
+            <div class="card-body">
+              <p class="card-text">is_answered:{{item.is_answered}}</p>
+              <p class="card-text">view_count:{{item.view_count}}</p>
+              <p class="card-text">closed_date:{{item.closed_date}}</p>
+              <p class="card-text">answer_count:{{item.answer_count}}</p>
+              <p class="card-text">score:{{item.score}}</p>
+              <p class="card-text">
+                last_activity_date:{{item.last_activity_date}}
+              </p>
+              <p class="card-text">creation_date:{{item.creation_date}}</p>
+              <p class="card-text">last_edit_date:{{item.last_edit_date}}</p>
+              <p class="card-text">question_id:{{item.question_id}}</p>
+              <a href="{{item.link}}" class="card-link"> link</a>
+              <p class="card-text">closed_reason:{{item.closed_reason}}</p>
+              <p class="card-text">title:{{item.title}}</p>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+
+      {% else %}
+      <li>Sorry, no athletes in this list.</li>
+      {% endif %}
+    </div>
+    <div >
+          <ul class="pagination justify-content-center m-0">
+              {% if search_data.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ search_data.previous_page_number }}">&laquo;</a></li>
+              {% else %}
+                  <li class="page-item"><span class="page-link">&laquo;</span></li>
+              {% endif %}
+              {% for i in paginator.page_range %}
+                  {% if search_data.number == i %}
+                      <li class="page-item active"><span class="page-link">{{ i }} <span
+                              class="sr-only">(current)</span></span>
+                      </li>
+                  {% else %}
+                      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+              {% endfor %}
+              {% if search_data.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ search_data.next_page_number }}">&raquo;</a></li>
+              {% else %}
+                  <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+              {% endif %}
+          </ul>
+  </div>
+  
+  
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+</html>
